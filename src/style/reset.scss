@@ -1,0 +1,28 @@
+
+#app{
+  height: 100%;
+}
+q:before,
+q:after {
+  content: "";
+}
+/* 正常链接 未访问 */
+/* 鼠标悬停 */
+a:hover {
+  text-decoration: none;
+}
+/* 默认不显示下划线，保持页面简洁 */
+ins,
+a {
+  text-decoration: none;
+}
+*, *:before, *:after {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+button{
+  outline:none;
+}
+
+[v-cloak] { display: none!important }
+
+img { content: normal !important; }

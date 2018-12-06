@@ -1,0 +1,51 @@
+image: harbor.yy.com/front_end/efox
+
+stages:
+  #- build
+  #- deploy
+
+before_script:
+
+cache:
+  paths:
+  - node_modules/
+
+deploy-test:
+  #stage: build
+  tags:
+    - webfe
+  artifacts:
+      expire_in: 1 week
+      paths:
+      - dist/
+  script:
+    - yarn
+    - yarn build
+  only:
+    - /test.*/
+
+deploy-pre:
+  tags:
+    - webfe
+  artifacts:
+      expire_in: 1 week
+      paths:
+      - dist/
+  script:
+    - yarn
+    - yarn prod
+  only:
+    - pre
+
+deploy-master:
+  tags:
+    - webfe
+  artifacts:
+      expire_in: 1 week
+      paths:
+      - dist/
+  script:
+    - yarn
+    - yarn prod
+  only:
+    - master

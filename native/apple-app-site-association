@@ -1,0 +1,19 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "NC23GKVB2Q.com.hago.HagoTV",
+                "paths": ["*"]
+            },
+            {
+                "appID": "RA5DTC26D2.com.hago.enterprise.HagoTV",
+                "paths": ["*"]
+            },
+            {
+                "appID": "EU7A98TEPP.com.hago.HagoTV.hxt",
+                "paths": ["*"]
+            } 
+        ]
+    }
+}

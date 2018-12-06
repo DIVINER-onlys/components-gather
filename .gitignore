@@ -1,0 +1,17 @@
+.DS_Store
+node_modules
+*.log
+.idea
+.vscode
+/dev
+/output
+/dist
+
+#webstorm配置文件
+/webstorm.webpack.config.js
+
+contextmenu-menu
+contextmenu
+# 增加lock文件提升以来速度
+# package-lock.json
+

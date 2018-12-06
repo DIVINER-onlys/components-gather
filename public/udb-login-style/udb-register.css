@@ -1,0 +1,60 @@
+.user-form .item .item-con{
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(79, 85, 81, .5);
+}
+.user-form .item-error .item-con{
+  border-color: #ea2328;
+}
+.item-con .btn{
+  height: 30px;
+  padding: 0 14px;
+  line-height: 30px;
+  background-color: #ea2328;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 4px;
+}
+.item-con .btn:hover{
+  background-color: #ff4650;
+}
+.voice-contain .btn{
+  color: #fea800;
+}
+.voice-contain:hover{
+  color: #fde075;
+}
+.voice-contain:active{
+  color: #fe8600;
+}
+.user-form .item .button{
+  width: 100%;
+  background-color: #ea2328;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  height: 42px;
+  color: #fff;
+  cursor: pointer;
+  -webkit-transition: all .2s ease 0s;
+  transition: all .2s ease 0s;
+  line-height: 42px;
+}
+.user-form .item .button:hover{
+  background-color: #ff4650;
+}
+.login-change button{
+  color: #fea800;
+}
+.login-change button:hover{
+  color: #fde075;
+}
+.login-change button:active{
+  color: #fe8600;
+}
+.user-form .item .label, .user-form .item .input{
+  color: #212121;
+}
+.user-form .item .err{
+  color: #ea2328;
+}

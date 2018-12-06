@@ -1,0 +1,156 @@
+syntax = "proto3";
+package com.yy.igame.channel.protocol.yyp.bean;
+option java_multiple_files = true;
+
+// option objc_class_prefix = "IgameChannel"; // OC专用，指定类前缀，其他语言不生效
+
+//****************************************************创建频道**********************************************    
+//serviceName: igameChannel functionName: createChannel
+message CreateChannelReq {
+    string title = 1;       //直播间标题
+}
+message CreateChannelResp {
+    int32 code = 1;         //操作结果 code=0成功 code=1失败 code=2频道标题违规
+    string message = 2;     //失败原因
+    int64 sid = 3;
+    string title = 4;
+}
+
+//****************************************************编辑频道信息*******************************************
+//serviceName: igameChannel functionName: editChannel
+message EditChannelReq {
+    int64 sid = 1;          //频道号
+    string title = 2;
+}
+message EditChannelResp {
+    int32 code = 1;       // code=0成功 code=1失败 code=2频道标题违规
+    string message = 2;
+    int64 sid = 3;
+}
+
+//****************************************************查询频道信息*******************************************
+//serviceName: igameChannel functionName: getChannelInfo
+message GetChannelInfoReq {
+    int64 sid = 1;
+}
+
+message GetChannelInfoResp {
+    int32 code = 1;
+    string message = 2;
+    string title = 3;
+    int64 uid = 4;
+}
+
+//****************************************************获取禁言列表*******************************************
+//serviceName: igameChannel functionName: getDisableTextUsers
+message GetDisableTextUsersReq {
+    int64 sid = 1;
+}
+
+message GetDisableTextUsersResp {
+    int32 code = 1;
+    string message = 2;
+    repeated UserInfo userInfoList = 3;
+}
+
+message UserInfo {
+    int64 uid = 1;          //uid
+    string nickName = 2;    //昵称
+    string avatarUrl = 3;   //头像
+    int32 gender = 4;       //性别,0表示女,1表示男
+    string sign = 5;        //签名
+    string birthday = 6;    //生日
+    string location = 7;    //位置
+    string notice = 8;     //直播公告
+}
+
+//批量操作用户返回
+message BatchOpraUserResp {
+    int32 code = 1;
+    string message = 2;
+    repeated int64 successUids = 3;     //操作成功的uid列表
+    repeated FailUser failUids = 4;     //操作失败的用户列表
+}
+
+message FailUser {
+    int64 uid = 1;                      //操作失败的用户uid
+    int32 resCode = 2;
+    string reason = 3;                  //失败原因
+}
+
+//******************************************************禁言************************************************
+//serviceName: igameChannel functionName: disableUser
+message DisableUserReq{
+    int64 sid = 1;
+    repeated int64 uids = 2;
+    bool op = 3;                //true封禁 false 取消封禁
+    string reason = 4;
+}
+
+//****************************************************永久封禁用户*******************************************
+//serviceName: igameChannel functionName: banUser
+message BanUserReq {
+    int64 sid = 1;
+    repeated int64 uids = 2;
+    bool op = 3;                //true封禁 false 取消封禁
+    string reason = 4;          //封禁原因
+}
+//返回BatchOpraUserResp
+
+//****************************************************踢出用户**********************************************
+//serviceName: igameChannel functionName: kickUser
+message KickUserReq {
+    int64 sid = 1;
+    repeated int64 uids = 2;
+    int32 seconds = 3;          //踢出直播间持续时间，单位秒 与产品交流暂定固定2小时
+    string reason = 4;
+}
+//返回BatchOpraUserResp
+
+//*********************************************公共信息（如系统公告）******************************************
+//serviceName: igameChannel functionName: commonInfo
+message CommonInfoReq {}
+
+message CommonInfoResp {
+    int32 code = 1;
+    string message = 2;
+    map<string, string> props = 3; //公共信息 目前只有系统公告，key：systemNotice
+}
+
+//*********************************************进频道接口*************************************************
+//serviceName: igameChannel functionName: entranceChannel
+message EntranceChannelReq {
+    int64 uid = 1; //用户uid
+    string userName = 2;//用户昵称
+    int64 sid = 3;//频道号
+    string channelName = 4;//频道名称
+    int64 anchorUid = 5; //主播uid
+    string anchorName = 6;//主播昵称
+}
+
+message EntranceChannelResp {
+    int32 code = 1;
+    string message = 2;
+}
+
+//*********************************************进频道通知 **************************************************
+//serviceName: igameChannel functionName: entranceChannelNotice
+message EntranceChannelNotice {
+    string userName = 1; //用户昵称
+    string channelName = 2; //频道名称
+    int64 uid = 3; //用户uid
+    string anchorName = 4;//主播昵称
+}
+//*********************************************频道操作通知***************************************************
+//serviceName: igameChannel functionName: channelManageNotice
+message ChannelManageNotice {
+    ChannelManageOpera opera = 1;
+    bool op = 2;                    // true 设置操作 false 取消操作
+}
+
+enum ChannelManageOpera {
+    DISABLE_TEXT = 0;   //禁言、取消禁言
+    BAN = 1;            //永久封禁、取消永久封禁
+    KICK_OUT = 2;       //踢出直播间
+    EDIT_MANAGER = 3;   //设为房管、取消房管
+}
