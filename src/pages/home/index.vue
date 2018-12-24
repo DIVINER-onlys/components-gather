@@ -4,6 +4,7 @@
       <h1>Welcome to Efox!</h1>
       <div class="btn">
         <div class="btn-toast" @click="showToast">show Toast</div>
+        <div class="btn-toast" @click="showLoading">show Loading</div>
       </div>
     </div>
   </div>
@@ -26,15 +27,35 @@ export default {
         top: '80%',
         left: '50%'
       }
+    },
+    loadingBackground () {
+      return {
+        backgroundColor: 'rgba(247, 200, 208, .4)'
+      }
+    },
+    loadingStyle () {
+      return {}
+    },
+    tipsStyle () {
+      return {
+        color: '#000000'
+      }
     }
   },
   methods: {
     showToast () {
-      this.$toast("I'm a toast", 2500, this.toastOptionStyle, 'none', true)
+      this.$toast("I'm a toast", 2500, this.toastOptionStyle, 'none', false)
+    },
+    showLoading () {
+      this.$loading('加载中', '', this.loadingBackground, this.loadingStyle, this.tipsStyle)
+      setTimeout(() => {
+        this.$loading('', 'close')
+      }, 2500)
     }
   },
   mounted () {
     // this.$toast.center('sss')
+    // this.$loading.open('加载中...')
   },
   beforeCreate () {
   }
@@ -63,7 +84,8 @@ export default {
       text-align: center;
       line-height: 80px;
       .btn-toast{
-        width: 200px;
+        padding: 0 20px;
+        min-width: 200px;
         height: 80px;
         border-radius: 20px;
         background: rgb(112, 187, 206);
